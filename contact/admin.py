@@ -12,4 +12,4 @@ class ContactAdmin(admin.ModelAdmin):
     list_per_page = 10
     list_max_show_all = 240
     list_display_links = ['id', 'phone']
-    list_editable = ['first_name', 'last_name']
+    list_editable = ['first_name']
