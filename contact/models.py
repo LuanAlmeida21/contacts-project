@@ -10,3 +10,5 @@ class Contact(models.Model):
     email = models.EmailField(max_length=240, blank=True)
     description = models.TextField(blank=True)
     created_contact = models.DateTimeField(default=timezone.now)
+    show = models.BooleanField(default=True)
+    picture = models.ImageField(blank=True, upload_to='pictures/%Y/%m')
