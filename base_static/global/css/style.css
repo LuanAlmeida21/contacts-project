@@ -1,10 +1,11 @@
 :root {
     --clr-light-gray: rgb(255, 255, 255);
-    --clr-light-red: rgb(192, 41, 66);
     --clr-dark-blue: rgb(0, 110, 255);
-    --clr-dark-green: rgb(155, 192, 155);
     --clr-light-green: rgb(199, 250, 199);
-    --clr-dark-green-shadow: rgb(172, 194, 172);
+    --clr-dark-green: rgb(155, 192, 155);
+    --clr-darkest-green: rgb(0, 73, 0);
+    --clr-light-green-shadow: rgb(172, 194, 172);
+    --clr-green-shadow: rgba(172, 194, 172, 0.3);
     --clr-black: rgb(0, 0, 0);
     --spacing: 1.5rem;
     --main-page-width: 120rem;
@@ -19,7 +20,7 @@
     --transition-fast: 300ms;
     --transition-medium: 600ms;
     --transition-slow: 1s;
-    --border-sizing: 1.2rem;
+    --border-sizing: 4px;
 }
 
 *,
@@ -110,4 +111,69 @@ h1 {
 
 .single-contact {
     margin: 5rem;
+}
+
+.header {
+    background: var(--clr-darkest-green);
+    padding: var(--spacing);
+    box-shadow: 0 5px 10px 2px var(--clr-light-green-shadow);
+    z-index: 1;
+    position: relative;
+}
+
+.header-heading {
+    font-size: var(--biggest-font-size);
+    text-align: center;
+}
+
+.header-link {
+    color: var(--clr-light-green);
+    text-decoration: none;
+    transition: filter var(--transition-fast) ease-in-out;
+}
+
+.header-link:hover {
+    filter: brightness(80%)
+}
+
+.menu {
+    margin: var(--spacing);
+}
+
+.menu-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
+.menu-link {
+    display: block;
+    padding: var(--spacing);
+    color: var(--clr-light-green);
+    text-decoration: none;
+    transition: background-color var(--transition-fast) ease-in-out;
+    border-radius: var(--border-sizing);
+}
+
+.menu-link:hover {
+    background: var(--clr-green-shadow)
+}
+
+.input {
+    display: flex;
+    justify-content: center;
+}
+
+.search-input {
+    font-size: var(--medium-font-size);
+    padding: 1rem 2rem;
+    width: 100%;
+    max-width: 32rem;
+    border-radius: var(--border-sizing);
+    border: 1px solid var(--clr-light-green)
+}
+
+.search-input:focus {
+    box-shadow: 0 0 15px var(--clr-light-green);
 }
