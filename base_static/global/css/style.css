@@ -177,3 +177,16 @@ h1 {
 .search-input:focus {
     box-shadow: 0 0 15px var(--clr-light-green);
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: var(--spacing);
+    font-size: var(--small-font-size);
+
+}
+
+.step-links a {
+    text-decoration: none;
+    color: var(--clr-dark-blue);
+}
