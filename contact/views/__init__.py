@@ -1,4 +1,5 @@
 # flake8: noqa
 # type: ignore
 
-from contact.views.contacts_view import *
+from .contacts_view import *
+from .create_form import *

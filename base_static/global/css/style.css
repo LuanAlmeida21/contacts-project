@@ -190,3 +190,44 @@ h1 {
     text-decoration: none;
     color: var(--clr-dark-blue);
 }
+
+.form-wrapper {
+    max-width: 60rem;
+    margin: var(--spacing) auto;
+
+}
+
+.form-content {
+    margin: var(--spacing) 0;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: var(--spacing);
+}
+
+.form-group label {
+    padding-bottom: 0.5rem;
+}
+
+.btn {
+    background-color: var(--clr-dark-blue);
+    color: var(--clr-light-gray);
+    font-weight: bold;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: var(--default-border-radius);
+    cursor: pointer;
+    transition: filter var(--transition-fast) ease-in-out;
+}
+
+.btn:hover {
+    filter: brightness(90%);
+}
+
+.errorlist li {
+    list-style-type: none;
+    padding: var(--spacing) 0;
+    color: red;
+}
