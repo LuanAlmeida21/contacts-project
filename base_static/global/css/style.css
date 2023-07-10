@@ -6,6 +6,7 @@
     --clr-darkest-green: rgb(0, 73, 0);
     --clr-light-green-shadow: rgb(172, 194, 172);
     --clr-green-shadow: rgba(172, 194, 172, 0.3);
+    --clr-gray: rgb(114, 126, 112);
     --clr-black: rgb(0, 0, 0);
     --spacing: 1.5rem;
     --main-page-width: 120rem;
@@ -211,23 +212,68 @@ h1 {
     padding-bottom: 0.5rem;
 }
 
+textarea {
+    resize: none;
+    font-family: inherit;
+}
+
+.form-group input,
+textarea,
+select {
+    border-style: solid;
+    padding: 7px;
+    font-size: var(--small-font-size);
+    border-width: 2px;
+    border-radius: 6px;
+    border-color: var(--clr-gray);
+}
+
+.form-group input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    box-shadow: 2px 2px 7px 0px rgba(42, 42, 42, .63);
+    border-color: var(--clr-black);
+}
+
 .btn {
-    background-color: var(--clr-dark-blue);
+    background-color: var(--clr-dark-green);
     color: var(--clr-light-gray);
     font-weight: bold;
     border: none;
     padding: 1rem 2rem;
-    border-radius: var(--default-border-radius);
+    border-radius: var(--border-sizing);
     cursor: pointer;
     transition: filter var(--transition-fast) ease-in-out;
 }
 
+.update-delete {
+    margin: 2rem 0;
+    padding: 0 1.5rem;
+    display: flex;
+    gap: 0 var(--spacing)
+}
+
+.btn-delete {
+    background: red;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: var(--clr-light-gray);
+}
+
+.btn-link:hover {
+    color: var(--clr-black);
+}
+
 .btn:hover {
     filter: brightness(90%);
+    color: var(--clr-black);
 }
 
 .errorlist li {
     list-style-type: none;
-    padding: var(--spacing) 0;
+    padding: 1rem 0;
     color: red;
 }

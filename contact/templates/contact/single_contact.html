@@ -11,6 +11,16 @@
         <p><b>Created Date: </b>{{contact.created_contact}}</p>
         <p><b>Description: </b>{{contact.description}}</p>
         <p><b>Category: </b>{{contact.category.name}}</p>
+        <div class="update-delete">
+            <button type="button" class="btn">
+                <a class="btn-link" href="{% url 'contact:update' contact.id %}">Update</a>
+            </button>
+
+            <form action="{% url 'contact:delete' contact.id %}" method="POST">
+                {% csrf_token %}
+                <button class="btn btn-delete" type="submit">Delete</button>
+            </form>
+        </div>
     </div>
     
 {% endblock content %}
