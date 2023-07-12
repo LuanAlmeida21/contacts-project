@@ -13,10 +13,12 @@
             <div class="form-group">
                 <label for="{{field.id_for_label}}">{{field.label}}</label>
                 {{field}}
-                {% comment %} {{field.errors}} {% endcomment %}
+                {{field.errors}}
+                {% if field.help_text %}
                 <div class="help-text">
                     {{field.help_text}}
                 </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>

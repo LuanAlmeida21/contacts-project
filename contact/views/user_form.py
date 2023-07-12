@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import redirect, render
 
 from contact.forms import RegisterUser
@@ -5,7 +6,7 @@ from contact.forms import RegisterUser
 
 def register(request):
 
-    form = RegisterUser()
+    form = RegisterUser(request.POST)
     context = {
         'form': form,
         'site_title': 'Register',
