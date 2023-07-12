@@ -198,6 +198,10 @@ h1 {
 
 }
 
+.form-wrapper h2 {
+    margin-bottom: 3rem;
+}
+
 .form-content {
     margin: var(--spacing) 0;
 }
@@ -276,4 +280,13 @@ select:focus {
     list-style-type: none;
     padding: 1rem 0;
     color: red;
+}
+
+.help-text {
+    padding-top: 1rem;
+}
+
+.help-text li {
+    list-style-type: none;
+    padding: 0.4rem 0;
 }
