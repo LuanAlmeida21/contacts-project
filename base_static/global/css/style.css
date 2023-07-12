@@ -278,7 +278,7 @@ select:focus {
 
 .errorlist li {
     list-style-type: none;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     color: red;
 }
 
@@ -290,3 +290,21 @@ select:focus {
     list-style-type: none;
     padding: 0.4rem 0;
 }
+
+.messages {
+    max-width: 600px;
+    margin: var(--spacing) auto;
+    margin-top: calc(var(--spacing) * 2);
+    padding: var(--spacing);
+    font-size: var(--small-font-size);
+    border-radius: var(--border-sizing);
+    text-align: center;
+}
+
+.messages.sucess {}
+
+.messages.error {}
+
+.messages.info {}
+
+.messages.warning {}
