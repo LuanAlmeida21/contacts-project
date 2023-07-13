@@ -13,8 +13,10 @@
             <div class="form-group">
                 <label for="{{field.id_for_label}}">{{field.label}}</label>
                 {{field}}
-                {% comment %} {{field.errors}}
-                {{field.help_text}} {% endcomment %}
+                {{field.errors}}
+                <div class="help-text">
+                    {{field.help_text}}
+                </div>   
             </div>
             {% if field.name == 'picture' and field.value.url %}
                 <div class="form-group">

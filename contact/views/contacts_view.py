@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
@@ -9,7 +8,6 @@ from contact.models import Contact
 
 
 def index(request):
-    messages.add_message(request, messages.SUCCESS, 'Sucess')
     contacts = Contact.objects.filter(show=True).order_by('-id')
 
     paginator = Paginator(contacts, 10)  # Show 10 contacts per page.

@@ -17,4 +17,6 @@ urlpatterns = [
 
     # user
     path('user/create/', views.register, name='register'),
+    path('user/login/', views.user_login, name='login'),
+    path('user/logout/', views.user_logout, name='logout'),
 ]

@@ -301,10 +301,27 @@ select:focus {
     text-align: center;
 }
 
-.messages.sucess {}
+.messages.success {
+    background-color: rgb(0, 255, 0);
+    border: 1px solid rgb(0, 165, 0);
 
-.messages.error {}
+}
 
-.messages.info {}
+.messages.error {
+    background-color: rgba(213, 0, 25, 0.637);
+    border: 1px solid rgb(134, 0, 16);
+}
 
-.messages.warning {}
+.messages.info {
+    background-color: rgb(46, 142, 253);
+    border: 1px solid rgb(32, 93, 163);
+}
+
+.messages.warning {
+    background-color: rgb(248, 199, 83);
+    border: 1px solid rgb(192, 155, 67)
+}
+
+.nonfield li {
+    color: var(--clr-black);
+}
