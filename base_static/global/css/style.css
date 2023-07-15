@@ -90,6 +90,10 @@ body {
     padding: var(--spacing);
 }
 
+.detail {
+    text-align: center;
+}
+
 .table-row:not(.table-row-header):hover {
     background-color: var(--clr-dark-green);
 }

@@ -25,7 +25,6 @@ def register(request):
 
     context = {
         'form': RegisterUser(),
-        'site_title': 'Register',
     }
 
     return render(request, 'contact/user_create.html', context)
@@ -39,7 +38,7 @@ def user_update(request):
         return render(
             request,
             'contact/user_create.html',
-            {'form': form}
+            context={'form': form}
         )
 
     form = UserUpdate(data=request.POST, instance=request.user)
@@ -48,7 +47,7 @@ def user_update(request):
         return render(
             request,
             'contact/user_create.html',
-            {'form': form}
+            context={'form': form}
         )
 
     form.save()
@@ -66,11 +65,13 @@ def user_login(request):
             user = form.get_user()
             auth.login(request, user)
             messages.add_message(request, messages.SUCCESS, 'Success Login')
-            return render(request, 'contact/login_user.html', {'form': form})
+            return render(request, 'contact/login_user.html',
+                          context={'form': form})
 
         messages.add_message(request, messages.ERROR, 'Invalid Login')
 
-    return render(request, 'contact/login_user.html', context={'form': form})
+    return render(request, 'contact/login_user.html',
+                  context={'form': form})
 
 
 @login_required(login_url='contact:user_login')

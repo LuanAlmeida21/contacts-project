@@ -10,7 +10,7 @@
         </caption>
         <thead>
             <tr class='table-row table-row-header'>
-                <th class='table-header'>ID</th>
+                <th class='table-header detail'>Detail</th>
                 <th class='table-header'>First Name</th>
                 <th class='table-header'>Last Name</th>
                 <th class='table-header'>Phone</th>
@@ -20,9 +20,9 @@
         <tbody>
             {% for contact in page_obj %}
             <tr class='table-row'>
-                <td class='table-cell'>
-                    <a class='table-link' href={% url 'contact:contact' contact.id %}>
-                        {{contact.id}}
+                <td class='table-cell detail'>
+                    <a class='table-link detail' href="{% url 'contact:contact' contact.id %}">
+                        ☰
                     </a>
                 </td>
                 <td class='table-cell'>
@@ -43,7 +43,7 @@
     </table>
 </div>
 {% else %}
-<div class="single-contact">
+<div class=" single-contact">
     <h1 class="single-contact-name">
         Contact don't found.
         {% endif %}

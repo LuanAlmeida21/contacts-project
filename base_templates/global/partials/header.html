@@ -1,27 +1,27 @@
 <header class="header">
     <h1 class="header-heading">
-        <a class="header-link" href={% url 'contact:index' %}>Contacts</a>
+        <a class="header-link" href="{% url 'contact:index' %}">Contacts</a>
     </h1>
 
-    <nav class="menu">
+    <nav class=" menu">
         <ul class="menu-list">
             {% if user.is_authenticated %}
-                <li class="menu-item">
-                    <a class="menu-link" href="{% url 'contact:create' %}">Create</a>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="{% url 'contact:user_update' %}">Update</a>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="{% url 'contact:user_logout' %}">Logout</a>
-                </li>
+            <li class="menu-item">
+                <a class="menu-link" href="{% url 'contact:create' %}">Create</a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="{% url 'contact:user_update' %}">Profile</a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="{% url 'contact:user_logout' %}">Logout</a>
+            </li>
             {% else %}
-                <li class="menu-item">
-                    <a class="menu-link" href="{% url 'contact:user_login' %}">Login</a>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="{% url 'contact:user_register' %}">Register</a>
-                </li>
+            <li class="menu-item">
+                <a class="menu-link" href="{% url 'contact:user_login' %}">Login</a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="{% url 'contact:user_register' %}">Register</a>
+            </li>
             {% endif %}
 
         </ul>
