@@ -1,3 +1,4 @@
+# flake8: noqa
 from django.urls import path
 
 from contact import views
@@ -19,4 +20,5 @@ urlpatterns = [
     path('user/create/', views.register, name='register'),
     path('user/login/', views.user_login, name='login'),
     path('user/logout/', views.user_logout, name='logout'),
+    path('user/update/', views.user_update, name='update'),
 ]

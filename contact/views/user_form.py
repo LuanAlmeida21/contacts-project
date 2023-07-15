@@ -1,9 +1,10 @@
 # from django.contrib import messages
 from django.contrib import auth, messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 
-from contact.forms import RegisterUser
+from contact.forms import RegisterUser, UserUpdate
 
 
 def register(request):
@@ -27,6 +28,46 @@ def register(request):
     }
 
     return render(request, 'contact/user_create.html', context)
+
+
+def user_update(request):
+    form = UserUpdate(instance=request.user)
+
+    if request.method != 'POST':
+        return render(
+            request,
+            'contact/user_create.html',
+            {'form': form}
+        )
+
+    form = UserUpdate(data=request.POST, instance=request.user)
+
+    if not form.is_valid():
+        return render(
+            request,
+            'contact/user_create.html',
+            {'form': form}
+        )
+
+    user = User.objects.get(username=request.user.username)
+    old_password = request.POST.get('old_password')
+    password = request.POST.get('password1')
+
+    # print(old_password)
+    # print(user.check_password(old_password))
+
+    if user.check_password(old_password) and password:
+        user.set_password(password)
+        user.save()
+        messages.add_message(request, messages.SUCCESS, 'Success Update')
+        return redirect('contact:login')
+    elif old_password and not form.verify_field():
+        form.set_old_password()
+        messages.add_message(request, messages.ERROR, 'Invalid Update')
+        return redirect('contact:update')
+    form.save()
+    messages.add_message(request, messages.SUCCESS, 'Success Update')
+    return redirect('contact:update')
 
 
 def user_login(request):

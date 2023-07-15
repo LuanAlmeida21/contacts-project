@@ -302,7 +302,8 @@ select:focus {
 }
 
 .messages.success {
-    background-color: rgb(0, 255, 0);
+
+    background-color: rgb(45, 194, 110);
     border: 1px solid rgb(0, 165, 0);
 
 }
