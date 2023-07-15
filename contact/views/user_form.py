@@ -2,7 +2,7 @@
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 
 from contact.forms import RegisterUser, UserUpdate
@@ -51,22 +51,6 @@ def user_update(request):
             {'form': form}
         )
 
-    user = User.objects.get(username=request.user.username)
-    old_password = request.POST.get('old_password')
-    password = request.POST.get('password1')
-
-    # print(old_password)
-    # print(user.check_password(old_password))
-
-    if user.check_password(old_password) and password:
-        user.set_password(password)
-        user.save()
-        messages.add_message(request, messages.SUCCESS, 'Success Update')
-        return redirect('contact:user_login')
-    elif old_password and not form.verify_field():
-        form.set_old_password()
-        messages.add_message(request, messages.ERROR, 'Invalid Update')
-        return redirect('contact:user_update')
     form.save()
     messages.add_message(request, messages.SUCCESS, 'Success Update')
     return redirect('contact:user_update')

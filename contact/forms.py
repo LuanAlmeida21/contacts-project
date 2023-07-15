@@ -59,14 +59,6 @@ class UserUpdate(forms.ModelForm):
 
     username = forms.CharField(disabled=True)
 
-    old_password = forms.CharField(label='Old Password',
-                                   strip=False,
-                                   required=False,
-                                   widget=forms.PasswordInput(
-                                       attrs=(
-                                           {"autocomplete": "current-password"})
-                                   ))
-
     password1 = forms.CharField(label='New Password',
                                 strip=False,
                                 required=False,
@@ -85,18 +77,18 @@ class UserUpdate(forms.ModelForm):
         model = User
         fields = ('first_name', 'last_name', 'email', 'username')
 
-    # def save(self, commit=True):
-    #     cleaned_data = self.cleaned_data
-    #     user = super().save(commit=False)
-    #     password = cleaned_data.get('password1')
+    def save(self, commit=True):
+        cleaned_data = self.cleaned_data
+        user = super().save(commit=False)
+        password = cleaned_data.get('password1')
 
-    #     if password:
-    #         user.set_password(password)
+        if password:
+            user.set_password(password)
 
-    #     if commit:
-    #         user.save()
+        if commit:
+            user.save()
 
-    #     return user
+        return user
 
     def clean(self):
         password1 = self.cleaned_data.get('password1')
@@ -121,30 +113,6 @@ class UserUpdate(forms.ModelForm):
                                ValidationError('Email already exists. ', code='Invalid'))
         return email
 
-    old_password_flag = True
-
-    def set_old_password(self):
-        self.old_password_flag = False
-        return 0
-
-    verify = True
-
-    def verify_field(self):
-        self.verify = False
-        return 0
-
-    def clean_old_password(self):
-        old_password = self.cleaned_data.get('old_password')
-        if not old_password and self.verify == False:
-            self.add_error('old_password', ValidationError(
-                "You must enter your old password."))
-
-        if self.old_password_flag == False:
-            self.add_error('old_password', ValidationError(
-                "The old password that you have entered is wrong."))
-
-        return old_password
-
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
         if password1:
@@ -158,7 +126,7 @@ class UserUpdate(forms.ModelForm):
 
 class ContactForm(forms.ModelForm):
 
-    picture = forms.ImageField(widget=forms.FileInput(
+    picture = forms.ImageField(required=False, widget=forms.FileInput(
         attrs={
             'accept': 'image/*',
         }

@@ -1,3 +1,4 @@
+# flake8: noqa
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -22,7 +23,9 @@ def create(request):
         }
 
         if form.is_valid():
-            contact = form.save()
+            contact = form.save(commit=False)
+            contact.owner = request.user
+            contact.save()
             return redirect('contact:update', contact_id=contact.id)
 
         return render(
@@ -48,7 +51,7 @@ def create(request):
 def update(request, contact_id):
 
     title_update = 'Update'
-    contact = get_object_or_404(Contact, id=contact_id, show=True)
+    contact = get_object_or_404(Contact, id=contact_id, show=True, owner=request.user)
     form_action = reverse('contact:update', args=(contact_id,))
 
     if request.method == 'POST':
@@ -86,7 +89,7 @@ def update(request, contact_id):
 
 @login_required(login_url='contact:user_login')
 def delete(request, contact_id):
-    contact = get_object_or_404(Contact, id=contact_id, show=True)
+    contact = get_object_or_404(Contact, id=contact_id, show=True, owner=request.user)
 
     confirmation = request.POST.get('confirmation', 'no')
     context = {
