@@ -4,13 +4,13 @@
 {% block content %}
 <div class="form-wrapper">
     <h2>Login</h2>
-    
+
     {% if user.is_authenticated %}
         <p>You make login with success.</p>
-        <p>Click <a href="{% url 'contact:logout' %}">here</a> for logout</p>
+        <p>Click <a href="{% url 'contact:user_logout' %}">here</a> for logout</p>
     {% else %}
-        {% include 'contact/partials/form_user.html' %}
+    {% include 'contact/partials/form_user.html' %}
     {% endif %}
 
 
-{% endblock content %}
+    {% endblock content %}

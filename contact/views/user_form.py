@@ -60,14 +60,14 @@ def user_update(request):
         user.set_password(password)
         user.save()
         messages.add_message(request, messages.SUCCESS, 'Success Update')
-        return redirect('contact:login')
+        return redirect('contact:user_login')
     elif old_password and not form.verify_field():
         form.set_old_password()
         messages.add_message(request, messages.ERROR, 'Invalid Update')
-        return redirect('contact:update')
+        return redirect('contact:user_update')
     form.save()
     messages.add_message(request, messages.SUCCESS, 'Success Update')
-    return redirect('contact:update')
+    return redirect('contact:user_update')
 
 
 def user_login(request):
@@ -89,4 +89,4 @@ def user_login(request):
 
 def user_logout(request):
     auth.logout(request)
-    return redirect('contact:login')
+    return redirect('contact:user_login')
