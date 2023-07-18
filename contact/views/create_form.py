@@ -64,7 +64,7 @@ def update(request, contact_id):
         if form.is_valid():
             contact = form.save()
             messages.add_message(request, messages.SUCCESS, 'Successfully Updated')
-            return redirect('contact:update', contact_id=contact.id)
+            return redirect('contact:contact', contact_id=contact.id)
 
         return render(
             request,

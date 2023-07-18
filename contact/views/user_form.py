@@ -15,7 +15,7 @@ def register(request):
 
         if form.is_valid():
             form.save()
-            return redirect('contact:index')
+            return redirect('contact:user_login')
 
         return render(
             request,
