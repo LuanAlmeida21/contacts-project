@@ -3,7 +3,7 @@ from typing import Any, Dict
 
 from django import forms
 from django.contrib.auth import password_validation
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -50,58 +50,20 @@ class UserUpdate(forms.ModelForm):
                                  required=True,
                                  error_messages={
                                      'min_length': f'Please, add more than 3 letters. '},
-                                 help_text='Required.')
+                                 )
 
     last_name = forms.CharField(min_length=3,
                                 max_length=50,
                                 required=True,
-                                help_text='Required.')
+                                error_messages={
+                                    'min_length': f'Please, add more than 3 letters. '},
+                                )
 
     username = forms.CharField(disabled=True)
-
-    password1 = forms.CharField(label='New Password',
-                                strip=False,
-                                required=False,
-                                widget=forms.PasswordInput(
-                                    attrs=({'auto_complete': 'new_password'})),
-                                help_text=password_validation.password_validators_help_text_html)
-
-    password2 = forms.CharField(label='Confirm Password',
-                                strip=False,
-                                required=False,
-                                widget=forms.PasswordInput(
-                                    attrs=({'auto_complete': 'new_password'})),
-                                )
 
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email', 'username')
-
-    def save(self, commit=True):
-        cleaned_data = self.cleaned_data
-        user = super().save(commit=False)
-        password = cleaned_data.get('password1')
-
-        if password:
-            user.set_password(password)
-
-        if commit:
-            user.save()
-
-        return user
-
-    def clean(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
-
-        if password1 or password2:
-            if password1 != password2:
-                self.add_error(
-                    'password2',
-                    ValidationError('Dont match passwords.')
-                )
-
-        return super().clean()
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -112,16 +74,6 @@ class UserUpdate(forms.ModelForm):
                 self.add_error('email',
                                ValidationError('Email already exists. ', code='Invalid'))
         return email
-
-    def clean_password1(self):
-        password1 = self.cleaned_data.get('password1')
-        if password1:
-            try:
-                if password1:
-                    password_validation.validate_password(password1)
-            except ValidationError as errors:
-                self.add_error('password1', ValidationError(errors))
-        return password1
 
 
 class ContactForm(forms.ModelForm):
@@ -137,3 +89,52 @@ class ContactForm(forms.ModelForm):
         model = Contact
         fields = ('first_name', 'last_name', 'phone', 'email',
                   'description', 'category', 'picture')
+
+
+class PasswordForm(PasswordChangeForm):
+
+    old_password = forms.CharField(
+        label='Current Password', required=False, widget=forms.PasswordInput)
+
+    new_password1 = forms.CharField(
+        label='New Password',
+        required=False,
+        widget=forms.PasswordInput,
+        help_text=password_validation.password_validators_help_text_html
+    )
+
+    new_password2 = forms.CharField(
+        label='Verify Password', required=False, widget=forms.PasswordInput)
+
+    def clean_new_password1(self):
+        new_password1 = self.cleaned_data.get('new_password1')
+        if new_password1:
+            try:
+                if new_password1:
+                    password_validation.validate_password(new_password1)
+            except ValidationError as errors:
+                self.add_error('new_password1', ValidationError(errors))
+        return new_password1
+
+    old_password_flag = True
+
+    def set_old_password_flag(self):
+        self.old_password_flag = False
+
+        return 0
+
+    def clean_old_password(self, *args, **kwargs):
+        old_password = self.cleaned_data.get('old_password')
+
+        if not old_password:
+            raise forms.ValidationError("You must enter your old password.")
+
+        if self.old_password_flag is False:
+            raise forms.ValidationError(
+                "The old password that you have entered is wrong.")
+
+        return super().clean_old_password()
+
+    class Meta:
+        model = User
+        fields = ('old_password', 'new_password1', 'new_password2')
