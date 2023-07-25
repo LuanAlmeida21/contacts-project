@@ -1,4 +1,8 @@
 # flake8: noqa
+from django.contrib.auth.views import (PasswordResetCompleteView,
+                                       PasswordResetConfirmView,
+                                       PasswordResetDoneView,
+                                       PasswordResetView)
 from django.urls import path
 
 from contact import views
@@ -22,4 +26,5 @@ urlpatterns = [
     path('user/logout/', views.user_logout, name='user_logout'),
     path('user/update/', views.user_update, name='user_update'),
     path('user/update/password/', views.user_password, name='user_password'),
+
 ]

@@ -94,7 +94,9 @@ class ContactForm(forms.ModelForm):
 class PasswordForm(PasswordChangeForm):
 
     old_password = forms.CharField(
-        label='Current Password', required=False, widget=forms.PasswordInput)
+        label='Current Password',
+        required=False,
+        widget=forms.PasswordInput)
 
     new_password1 = forms.CharField(
         label='New Password',
